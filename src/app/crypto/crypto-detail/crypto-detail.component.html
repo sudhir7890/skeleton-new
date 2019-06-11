@@ -1,0 +1,98 @@
+<div
+    id="dashboard-project"
+    class="page-layout simple right-sidebar"
+    fxLayout="row"
+>
+    <!-- CENTER -->
+    <div class="center" fusePerfectScrollbar>
+        <!-- HEADER -->
+        <div
+            class="header  p-24 pb-0"
+            fxLayout="column"
+            fxLayoutAlign="space-between"
+        >
+            <div fxLayout="row" fxLayoutAlign="space-between start">
+                <span
+                    class="mat-display-1 my-0 my-sm-24 welcome-message"
+                    [@animate]="{ value: '*', params: { x: '50px' } }"
+                    >Bitcoin -BTC- forecast, History and Predictions
+                </span>
+            </div>
+        </div>
+
+
+        <div class="clearfix coin-logo-wrapper">
+                <img class="coin-icon" width="70" height="70" alt="Bitcoin" onerror="this.style.display='none'" >
+            
+                <div class="text-info-left">
+                    <h2 class="coin-name">
+                        Bitcoin
+                        <!----><span class="coin-symbol" >BTC</span><!---->
+                        <a href="" class="text-sm" >
+                            <span ng-show="!coinFollowed || coinFollowed == 'wait'" class=""><i class="fal fa-heart"></i></span>
+                            <span  class="ng-hide"><i class="fa fa-heart"></i></span>
+                        </a>
+                    </h2>
+                    <span class="coin-price">
+                        <span ng-class="{ 'text-success fal fa-long-arrow-up': details.market.percent_change_1h >= 0, 'text-danger fal fa-long-arrow-down': details.market.percent_change_1h < 0 }" animate-change="details.market.percent_change_1h" change-class="flash-long" class="fal text-success fa-long-arrow-up" style=""></span>
+                        $7,979.00
+                    </span>
+                </div>
+            </div>
+        <!-- / HEADER -->
+
+        <!-- CONTENT -->
+        <div class="content">
+            <mat-tab-group dynamicHeight>
+                <mat-tab label="History">
+                    
+                        <div class="main-widget">
+
+                                <div class="position-relative p-24 blue-600"
+                                     fxLayout="row" fxLayoutAlign="space-between center">
+                                    <div fxLayout="column" fxLayoutAlign="start start">
+                                        <span class="h2">Bitcoin -BTC History 
+                                            </span>
+                                        <span class="h5 secondary-text">$7,975.57</span>
+                                    </div>
+                                   
+                                </div>
+                        
+                                <div class="position-relative h-256 pb-16 blue-600">
+                                    <canvas baseChart
+                                            [datasets]="widgets.widget1.datasets[widget1SelectedYear]"
+                                            [labels]="widgets.widget1.labels"
+                                            [colors]="widgets.widget1.colors"
+                                            [options]="widgets.widget1.options"
+                                            [chartType]="widgets.widget1.chartType">
+                                    </canvas>
+                                </div>
+                                <div class="position-relative" fxLayout="row" fxLayoutAlign="center center">
+                                        <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
+                                             (click)="widget1SelectedYear = '2016'"
+                                             [ngClass]="{'blue-700': widget1SelectedYear === '2016'}">
+                                            2016
+                                        </div>
+                                        <div class="py-8 px-12 border-radius-2 line-height-1 mr-8 cursor-pointer"
+                                             (click)="widget1SelectedYear = '2017'"
+                                             [ngClass]="{'blue-700': widget1SelectedYear === '2017'}">
+                                            2017
+                                        </div>
+                                        <div class="py-8 px-12 border-radius-2 line-height-1 cursor-pointer"
+                                             (click)="widget1SelectedYear = '2018'"
+                                             [ngClass]="{'blue-700': widget1SelectedYear === '2018'}">
+                                            2018
+                                        </div>
+                                    </div>
+                        
+                            </div>
+                </mat-tab>
+
+                <mat-tab label="Forecast"> </mat-tab>
+                <mat-tab label="Charts"> </mat-tab>
+                <mat-tab label="Exchanges"> </mat-tab>
+                <mat-tab label="Converter"> </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

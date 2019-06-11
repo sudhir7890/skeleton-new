@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { MatCardModule } from '@angular/material';
+import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
@@ -15,34 +12,69 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AgmCoreModule } from '@agm/core';
+import { MatMenuModule } from '@angular/material/menu';
 
-import { FuseDemoModule } from '@fuse/components/demo/demo.module';
 
-
-import { SampleComponent } from './sample.component';
 import { FuseSharedModule } from '@fuse/shared.module';
+import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
+
+
+import { CryptoOverviewComponent } from './crypto-overview/crypto-overview.component';
+
+import { ChartsModule } from 'ng2-charts';
+
+import { CryptoService } from '../../@fuse/services/crypto.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CryptoDetailComponent } from '../crypto/crypto-detail/crypto-detail.component';
+
+import { CryptoDetaildService } from '../crypto/crypto-detail/crypto.details.service';
+
+
+
 
 const routes = [
+
+
+
     {
-        path     : 'sample',
-        component: SampleComponent
+        path     : 'crypto',
+        component: CryptoOverviewComponent,
+        resolve  : {
+            academy: CryptoService
+        }
+    },
+    {
+        path     : 'crypto/: orderId',
+        component: CryptoDetailComponent,
+        resolve  : {
+            academy: CryptoDetaildService
+        }
+    },
+    {
+        path      : '**',
+        redirectTo: 'crypto'
     }
+
+    
+
 ];
+
 
 @NgModule({
     declarations: [
-        SampleComponent
+        CryptoOverviewComponent,
+        CryptoDetailComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
 
         TranslateModule,
-        MatCardModule,
-        FuseDemoModule,
 
+        ChartsModule,
         MatButtonModule,
         MatChipsModule,
         MatExpansionModule,
@@ -52,7 +84,9 @@ const routes = [
         MatPaginatorModule,
         MatRippleModule,
         MatSelectModule,
+        MatMenuModule,
         MatSortModule,
+        MatCardModule,
         MatSnackBarModule,
         MatTableModule,
         MatTabsModule,
@@ -61,13 +95,22 @@ const routes = [
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyD81ecsCj4yYpcXSLFcYU97PvRsE_X8Bx8'
         }),
+
+
         FuseSharedModule
     ],
     exports     : [
-        SampleComponent
+        CryptoOverviewComponent,
+        CryptoDetailComponent
+    ],
+    providers   : [
+         CryptoService,
+         CryptoDetaildService
     ]
 })
 
-export class SampleModule
+
+
+export class CryptoModule
 {
 }
