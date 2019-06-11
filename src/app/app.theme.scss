@@ -87,6 +87,10 @@ $typography: mat-typography-config(
     // Layout components
     @include chat-panel-theme($theme);
     @include toolbar-theme($theme);
+
+
+    //apps
+    // @include e-commerce-orders-theme($theme);
 }
 
 // -----------------------------------------------------------------------------------------------------

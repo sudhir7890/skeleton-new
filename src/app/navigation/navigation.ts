@@ -20,7 +20,36 @@ export const navigation: FuseNavigation[] = [
                     bg       : '#F44336',
                     fg       : '#FFFFFF'
                 }
-            }
+            },
+            {
+                id       : 'crypto',
+                title    : 'CRYPTO',
+                translate: 'NAV.CRYPTO.BADGE',
+                type     : 'collapsable',
+                icon     : 'shopping_cart',
+                
+                url      : '/apps/crypto',
+                badge    : {
+                    title    : '25',
+                   
+                    bg       : '#644336',
+                    fg       : '#FFFFFF'
+                }
+            },
         ]
+    },
+    {
+        id       : 'cryptocurrency',
+        title    : 'Cryptocurrecny',
+
+        url      : '/apps/crypto',
+        type     : 'item',
+        icon     : 'email',
+        badge    : {
+            title    : '25',
+           
+            bg       : '#644336',
+            fg       : '#FFFFFF'
+        }
     }
 ];

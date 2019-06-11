@@ -1,16 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CryptoService implements Resolve<any>
-
+@Injectable()
+export class CryptoDetaildService implements Resolve<any>
 {
-    orders: any[];
-    onOrdersChanged: BehaviorSubject<any>;
+    widgets: any[];
 
     /**
      * Constructor
@@ -21,8 +17,6 @@ export class CryptoService implements Resolve<any>
         private _httpClient: HttpClient
     )
     {
-        // Set the defaults
-        this.onOrdersChanged = new BehaviorSubject({});
     }
 
     /**
@@ -37,7 +31,7 @@ export class CryptoService implements Resolve<any>
         return new Promise((resolve, reject) => {
 
             Promise.all([
-                this.getOrders()
+                this.getWidgets()
             ]).then(
                 () => {
                     resolve();
@@ -48,20 +42,18 @@ export class CryptoService implements Resolve<any>
     }
 
     /**
-     * Get orders
+     * Get widgets
      *
      * @returns {Promise<any>}
      */
-    getOrders(): Promise<any>
+    getWidgets(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this._httpClient.get('api/e-commerce-orders')
+            this._httpClient.get('api/analytics-dashboard-widgets')
                 .subscribe((response: any) => {
-                    this.orders = response;
-                    this.onOrdersChanged.next(this.orders);
+                    this.widgets = response;
                     resolve(response);
                 }, reject);
         });
     }
 }
-

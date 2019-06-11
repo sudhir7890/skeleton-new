@@ -21,7 +21,7 @@ import { CryptoDbService } from '../app/services/crypto-db.service';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { SampleModule } from 'app/main/sample/sample.module';
-import { CryptoModule } from './crypto/crypto-overview/crypto.module';
+import { CryptoModule } from './crypto/crypto.module';
 
 const appRoutes: Routes = [
     // {
@@ -34,14 +34,14 @@ const appRoutes: Routes = [
     // },
 
     {
-        path      : '**',
+        path      : 'crypto',
         redirectTo: '../app/crypto/crypto-overview'
     },
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,        
     ],
     imports     : [
         BrowserModule,
@@ -50,10 +50,10 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
 
         TranslateModule.forRoot(),
-        // InMemoryWebApiModule.forRoot(CryptoDbService, {
-        //     delay             : 0,
-        //     passThruUnknownUrl: true
-        // }),
+        InMemoryWebApiModule.forRoot(CryptoDbService, {
+            delay             : 0,
+            passThruUnknownUrl: true
+        }),
 
 
         // Material moment date module
